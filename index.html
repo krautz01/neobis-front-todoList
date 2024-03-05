@@ -1,36 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
+    <link rel="stylesheet" href="./index.css" />
+    <meta charset="UTF-8" />
     <title>Todo List</title>
   </head>
   <body>
     <h1>What's up, Bektur</h1>
     <p>Create TODO</p>
-    <input />
-    <div class="category_wrapper">
-      <h2>Pick a category</h2>
-      <div class="category">
-        <div class="category_button">
-          <img />
-          <p class="category_button_type">Business</p>
-        </div>
-        <div class="category_button">
-          <img />
-          <p class="category_button_type">Business</p>
+    <div class="creatTask_container">
+      <input type="text" id="addTaskInput" placeholder="What's on your todo list?"/>
+      <div class="category_wrapper">
+        <h2>Pick a category</h2>
+        <div class="category">
+          <div class="category_button" >
+            <img />
+            <p class="category_button_type">Business</p>
+          </div>
+          <div class="category_button">
+            <img />
+            <p class="category_button_type">Personal</p>
+          </div>
         </div>
       </div>
+      <button onclick="addTask()">Add todo</button>
     </div>
-    <button>Add todo</button>
-    <div class="todoList">
+    <div class="todoList" id="todoList">
       <h1>TODO LIST</h1>
-      <div class="todoList_item">
-        <img />
-        <p class="todoList_item_info"></p>
-        <div class="todoList_item_actions">
-          <button class="todoList_item_action">Edit</button>
-          <button class="todoList_item_action">Delete</button>
-        </div>
+      <ul class="todoList_item">
+        <li>
+
+          <img />
+          <p class="todoList_item_info"></p>
+          <div class="todoList_item_actions">
+            <button class="todoList_item_editBTN">Edit</button>
+            <button class="todoList_item_deleteBTN">Delete</button>
+        </li>
+        </ul>
       </div>
     </div>
+    <script src="./index.js"></script>
   </body>
 </html>
