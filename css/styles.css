@@ -1,15 +1,33 @@
 /* Reset default styles */
 body,
 h1,
-p {
+p,
+ul,
+li {
   margin: 0;
   padding: 0;
 }
 body {
+  width: 1440px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+li {
+  width: 100%;
+  display: flex;
+  list-style-type: none;
+}
+
+.todoList_item_text{
+  color: blue;
+}
+
+.todoList_item_text--done {
+  color: rgb(108, 108, 108);
+  text-decoration: line-through;
 }
 
 /* Add your custom styles below */

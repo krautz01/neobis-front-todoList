@@ -9,10 +9,10 @@ function addTask() {
   } else {
     li.classList.add("todoList_item");
     li.innerHTML = `
-    <img />
-    <p>${task}</p>
+    <input type="radio" data-action="done"/>
+    <p class="todoList_item_text">${task}</p>
          <span class="todoList_item_buttons">
-            <button class="todoList_item_buttons_edit" data-action="done">Edit</button>
+            <button class="todoList_item_buttons_edit" data-action="edit">Edit</button>
             <button class="todoList_item_buttons_delete" data-action="delete">Delete</button>
          </span>
       `;
@@ -22,9 +22,21 @@ function addTask() {
   addTaskInput.value = "";
   addTaskInput.focus();
 }
+
 todoList.addEventListener("click", deleteTask);
+todoList.addEventListener("click", doneTask);
+
 function deleteTask(event) {
   if (event.target.dataset.action === "delete") {
     event.target.closest("li").remove();
+  }
+}
+
+function doneTask(event) {
+  if (event.target.dataset.action === "done") {
+    console.log("ghvjhbbj7777777777777");
+    event.target.nextElementSibling.classList.toggle(
+      "todoList_item_text--done"
+    );
   }
 }

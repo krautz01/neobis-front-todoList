@@ -17,14 +17,20 @@
       <div class="category_wrapper">
         <h2>Pick a category</h2>
         <div class="category">
-          <div class="category_button">
-            <img />
-            <p class="category_button_type">Business</p>
-          </div>
-          <div class="category_button" >
-            <img />
-            <p class="category_button_type">Personal</p>
-          </div>
+          <input
+            type="radio"
+            id="business"
+            name="category"
+            value="business"
+            class="category_business"
+          />
+          <input
+            type="radio"
+            id="personal"
+            name="category"
+            value="personal"
+            class="category_personal"
+          />
         </div>
       </div>
       <button onclick="addTask()">Add todo</button>
