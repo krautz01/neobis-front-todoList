@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" href="./index.css" />
+    <link rel="stylesheet" href="./css/styles.css" />
     <meta charset="UTF-8" />
     <title>Todo List</title>
   </head>
@@ -9,15 +9,19 @@
     <h1>What's up, Bektur</h1>
     <p>Create TODO</p>
     <div class="creatTask_container">
-      <input type="text" id="addTaskInput" placeholder="What's on your todo list?"/>
+      <input
+        type="text"
+        id="addTaskInput"
+        placeholder="What's on your todo list?"
+      />
       <div class="category_wrapper">
         <h2>Pick a category</h2>
         <div class="category">
-          <div class="category_button" >
+          <div class="category_button">
             <img />
             <p class="category_button_type">Business</p>
           </div>
-          <div class="category_button">
+          <div class="category_button" >
             <img />
             <p class="category_button_type">Personal</p>
           </div>
@@ -25,20 +29,12 @@
       </div>
       <button onclick="addTask()">Add todo</button>
     </div>
-    <div class="todoList" id="todoList">
+    <div class="todoList_container">
       <h1>TODO LIST</h1>
-      <ul class="todoList_item">
-        <li>
-
-          <img />
-          <p class="todoList_item_info"></p>
-          <div class="todoList_item_actions">
-            <button class="todoList_item_editBTN">Edit</button>
-            <button class="todoList_item_deleteBTN">Delete</button>
-        </li>
-        </ul>
-      </div>
+      <ul class="todoList" id="todoList">
+        <!--  место для todo элементов  -->
+      </ul>
     </div>
-    <script src="./index.js"></script>
+    <script src="./js/main.js"></script>
   </body>
 </html>
