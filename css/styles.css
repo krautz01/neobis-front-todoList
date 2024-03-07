@@ -9,6 +9,7 @@ li {
 }
 body {
   width: 1440px;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -19,10 +20,45 @@ li {
   width: 100%;
   display: flex;
   list-style-type: none;
+  margin-bottom: 5px;
 }
 
-.todoList_item_text{
-  color: blue;
+.content {
+  width: 50%;
+  height: 70vh;
+  background-color: aqua;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.todoList_item {
+  width: 60%;
+  height: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px solid rgb(0, 38, 255);
+  border-radius: 5px;
+  padding: 4px;
+
+}
+
+.todoList_item_text {
+  flex: 1;
+  color: rgb(0, 0, 0);
+}
+
+.todoList_container , .todoList{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.todoList_item_button_edit .todoList_item_button_delete {
+background-color: brown;
 }
 
 .todoList_item_text--done {

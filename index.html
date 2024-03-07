@@ -6,40 +6,42 @@
     <title>Todo List</title>
   </head>
   <body>
-    <h1>What's up, Bektur</h1>
-    <p>Create TODO</p>
-    <div class="creatTask_container">
-      <input
-        type="text"
-        id="addTaskInput"
-        placeholder="What's on your todo list?"
-      />
-      <div class="category_wrapper">
-        <h2>Pick a category</h2>
-        <div class="category">
-          <input
-            type="radio"
-            id="business"
-            name="category"
-            value="business"
-            class="category_business"
-          />
-          <input
-            type="radio"
-            id="personal"
-            name="category"
-            value="personal"
-            class="category_personal"
-          />
+    <div class="content">
+      <h1>What's up, Bektur</h1>
+      <p>Create TODO</p>
+      <div class="creatTask_container">
+        <input
+          type="text"
+          id="addTaskInput"
+          placeholder="What's on your todo list?"
+        />
+        <div class="category_wrapper">
+          <h2>Pick a category</h2>
+          <div class="category">
+            <input
+              type="radio"
+              id="business"
+              name="category"
+              value="business"
+              class="category_business"
+            />
+            <input
+              type="radio"
+              id="personal"
+              name="category"
+              value="personal"
+              class="category_personal"
+            />
+          </div>
         </div>
+        <button onclick="addTask()">Add todo</button>
       </div>
-      <button onclick="addTask()">Add todo</button>
-    </div>
-    <div class="todoList_container">
-      <h1>TODO LIST</h1>
-      <ul class="todoList" id="todoList">
-        <!--  место для todo элементов  -->
-      </ul>
+      <div class="todoList_container">
+        <h1>TODO LIST</h1>
+        <ul class="todoList" id="todoList">
+          <!--  место для todo элементов  -->
+        </ul>
+      </div>
     </div>
     <script src="./js/main.js"></script>
   </body>
