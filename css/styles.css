@@ -23,13 +23,45 @@ li {
   margin-bottom: 5px;
 }
 
+.category_business {
+  background-color: blue;
+  width: 22px;
+  height: 22px;
+  border-radius: 11px;
+}
+
+.category_personal {
+  background-color: red;
+  width: 22px;
+  height: 22px;
+  border-radius: 11px;
+}
+
+input[type="radio"] {
+  cursor: pointer;
+  height: 22px;
+  width: 22px;
+}
+
 .content {
   width: 50%;
   height: 70vh;
   background-color: aqua;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: left;
+}
+
+.greetings {
+  font-size: 3rem;
+}
+
+.userName {
+  width: 50%;
+  height: 3.5rem;
+  font-size: 3rem;
+  border: none;
+  background-color: aqua;
 }
 
 .todoList_item {
@@ -41,7 +73,6 @@ li {
   border: 2px solid rgb(0, 38, 255);
   border-radius: 5px;
   padding: 4px;
-
 }
 
 .todoList_item_text {
@@ -49,21 +80,22 @@ li {
   color: rgb(0, 0, 0);
 }
 
-.todoList_container , .todoList{
+.todoList_container,
+.todoList {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-
 .todoList_item_button_edit .todoList_item_button_delete {
-background-color: brown;
+  background-color: brown;
 }
 
 .todoList_item_text--done {
   color: rgb(108, 108, 108);
   text-decoration: line-through;
+  flex: 1;
 }
 
 /* Add your custom styles below */

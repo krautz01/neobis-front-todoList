@@ -7,7 +7,9 @@
   </head>
   <body>
     <div class="content">
-      <h1>What's up, Bektur</h1>
+      <span class="greetings">
+        What's up, <input class="userName" type="text"></input>
+      </span>
       <p>Create TODO</p>
       <div class="creatTask_container">
         <input
@@ -36,12 +38,12 @@
         </div>
         <button onclick="addTask()">Add todo</button>
       </div>
-      <div class="todoList_container">
+      <form class="todoList_container" id="form">
         <h1>TODO LIST</h1>
         <ul class="todoList" id="todoList">
           <!--  место для todo элементов  -->
         </ul>
-      </div>
+      </form>
     </div>
     <script src="./js/main.js"></script>
   </body>
