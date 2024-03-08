@@ -1,7 +1,10 @@
 const nAme = "John";
+const categoryBusiness = document.querySelector("#business");
+const categoryPersonal = document.querySelector("#personal");
 
 const addTaskInput = document.querySelector("#addTaskInput");
 const todoList = document.querySelector("#todoList");
+
 let tasks = [];
 // Загрузка задач из localStorage при загрузке страницы
 if (localStorage.getItem("tasks")) {
@@ -42,14 +45,16 @@ function addTask() {
       id: Date.now(),
       text: taskText,
       done: false,
+      category: "business",
     };
+
     tasks.push(newTask);
     saveToLocalStorage();
     const cssClass = newTask.done
       ? "todoList_item_text--done"
       : "todoList_item_text";
     const taskHTML = `<li class="todoList_item" id="${newTask.id}">
-        <input type="radio" data-action="done"/>
+        <input type="radio" data-action="done" class="category_${newTask.category}"/>
         <p class="${cssClass}">${newTask.text}</p>
         <span class="todoList_item_buttons">
           <button class="todoList_item_button_edit" data-action="edit">Edit</button>
@@ -61,6 +66,12 @@ function addTask() {
     addTaskInput.focus();
   }
 }
+// Функция добавления категории
+function addCategory(event) {
+  newTask.category = event.target.value;
+  console.log(event.target.value);
+}
+
 // Функция удаления задачи
 function deleteTask(event) {
   const taskId = Number(event.target.dataset.taskId);
@@ -79,6 +90,21 @@ function doneTask(event) {
   const taskTitle = parentNode.querySelector(".todoList_item_text");
   taskTitle.classList.toggle("todoList_item_text--done");
 }
+
+// Функция редактирования задачи
+function editTask(event) {
+  const parentNode = event.target.closest("li");
+  const taskId = Number(parentNode.id);
+  const task = tasks.find((task) => task.id === taskId);
+  const taskTitle = parentNode.querySelector(".todoList_item_text");
+  const newTitle = prompt("Edit task", task.text);
+  if (newTitle) {
+    task.text = newTitle;
+    taskTitle.textContent = newTitle;
+    saveToLocalStorage();
+  }
+}
+
 // Функция сохранения задач в localStorage
 function saveToLocalStorage() {
   localStorage.setItem("tasks", JSON.stringify(tasks));
