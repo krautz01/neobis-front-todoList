@@ -1,117 +1,118 @@
-const nAme = "John";
-const categoryBusiness = document.querySelector("#business");
-const categoryPersonal = document.querySelector("#personal");
+window.addEventListener('load', () => {
+	todos = JSON.parse(localStorage.getItem('todos')) || [];
+	const nameInput = document.querySelector('#name');
+	const newTodoForm = document.querySelector('#new-todo-form');
 
-const addTaskInput = document.querySelector("#addTaskInput");
-const todoList = document.querySelector("#todoList");
+	const username = localStorage.getItem('username') || '';
 
-let tasks = [];
-// Загрузка задач из localStorage при загрузке страницы
-if (localStorage.getItem("tasks")) {
-  tasks = JSON.parse(localStorage.getItem("tasks"));
-}
-// Отображение задач при загрузке страницы
-tasks.forEach(function (task) {
-  const cssClass = task.done
-    ? "todoList_item_text--done"
-    : "todoList_item_text";
-  const taskHTML = `<li class="todoList_item" id="${task.id}">
-      <input type="radio" data-action="done"/>
-      <p class="${cssClass}">${task.text}</p>
-      <span class="todoList_item_buttons">
-        <button class="todoList_item_button_edit" data-action="edit">Edit</button>
-        <button class="todoList_item_button_delete" data-action="delete" data-task-id="${task.id}">Delete</button>
-      </span>
-    </li>`;
-  todoList.insertAdjacentHTML("beforeend", taskHTML);
-});
-// Обработчик событий для списка задач
-todoList.addEventListener("click", handleTaskAction);
-// Функция обработки действий с задачей (удаление или выполнение)
-function handleTaskAction(event) {
-  if (event.target.dataset.action === "delete") {
-    deleteTask(event);
-  } else if (event.target.dataset.action === "done") {
-    doneTask(event);
-  }
-}
-// Функция добавления задачи
-function addTask() {
-  const taskText = addTaskInput.value;
-  if (taskText === "") {
-    alert("Please enter a task");
-  } else {
-    const newTask = {
-      id: Date.now(),
-      text: taskText,
-      done: false,
-      category: "business",
-    };
+	nameInput.value = username;
 
-    tasks.push(newTask);
-    saveToLocalStorage();
-    const cssClass = newTask.done
-      ? "todoList_item_text--done"
-      : "todoList_item_text";
-    const taskHTML = `<li class="todoList_item" id="${newTask.id}">
-        <input type="radio" data-action="done" class="category_${newTask.category}"/>
-        <p class="${cssClass}">${newTask.text}</p>
-        <span class="todoList_item_buttons">
-          <button class="todoList_item_button_edit" data-action="edit">Edit</button>
-          <button class="todoList_item_button_delete" data-action="delete" data-task-id="${newTask.id}">Delete</button>
-        </span>
-      </li>`;
-    todoList.insertAdjacentHTML("beforeend", taskHTML);
-    addTaskInput.value = "";
-    addTaskInput.focus();
-  }
-}
-// Функция добавления категории
-function addCategory(event) {
-  newTask.category = event.target.value;
-  console.log(event.target.value);
-}
+	nameInput.addEventListener('change', (e) => {
+		localStorage.setItem('username', e.target.value);
+	})
 
-// Функция удаления задачи
-function deleteTask(event) {
-  const taskId = Number(event.target.dataset.taskId);
-  tasks = tasks.filter((task) => task.id !== taskId);
-  saveToLocalStorage();
-  const parentNode = event.target.closest("li");
-  parentNode.remove();
-}
-// Функция выполнения
-function doneTask(event) {
-  const parentNode = event.target.closest("li");
-  const taskId = Number(parentNode.id);
-  const task = tasks.find((task) => task.id === taskId);
-  task.done = !task.done;
-  saveToLocalStorage();
-  const taskTitle = parentNode.querySelector(".todoList_item_text");
-  taskTitle.classList.toggle("todoList_item_text--done");
-}
+	newTodoForm.addEventListener('submit', e => {
+		e.preventDefault();
 
-// Функция редактирования задачи
-function editTask(event) {
-  const parentNode = event.target.closest("li");
-  const taskId = Number(parentNode.id);
-  const task = tasks.find((task) => task.id === taskId);
-  const taskTitle = parentNode.querySelector(".todoList_item_text");
-  const newTitle = prompt("Edit task", task.text);
-  if (newTitle) {
-    task.text = newTitle;
-    taskTitle.textContent = newTitle;
-    saveToLocalStorage();
-  }
-}
+		const todo = {
+			content: e.target.elements.content.value,
+			category: e.target.elements.category.value,
+			done: false,
+			createdAt: new Date().getTime()
+		}
 
-// Функция сохранения задач в localStorage
-function saveToLocalStorage() {
-  localStorage.setItem("tasks", JSON.stringify(tasks));
+		todos.push(todo);
+
+		localStorage.setItem('todos', JSON.stringify(todos));
+
+		// Reset the form
+		e.target.reset();
+
+		DisplayTodos()
+	})
+
+	DisplayTodos()
+})
+
+function DisplayTodos () {
+	const todoList = document.querySelector('#todo-list');
+	todoList.innerHTML = "";
+
+	todos.forEach(todo => {
+		const todoItem = document.createElement('div');
+		todoItem.classList.add('todo-item');
+
+		const label = document.createElement('label');
+		const input = document.createElement('input');
+		const span = document.createElement('span');
+		const content = document.createElement('div');
+		const actions = document.createElement('div');
+		const edit = document.createElement('button');
+		const deleteButton = document.createElement('button');
+
+		input.type = 'checkbox';
+		input.checked = todo.done;
+		span.classList.add('bubble');
+		if (todo.category == 'personal') {
+			span.classList.add('personal');
+		} else {
+			span.classList.add('business');
+		}
+		content.classList.add('todo-content');
+		actions.classList.add('actions');
+		edit.classList.add('edit');
+		deleteButton.classList.add('delete');
+
+		content.innerHTML = `<input type="text" value="${todo.content}" readonly>`;
+		edit.innerHTML = 'Edit';
+		deleteButton.innerHTML = 'Delete';
+
+		label.appendChild(input);
+		label.appendChild(span);
+		actions.appendChild(edit);
+		actions.appendChild(deleteButton);
+		todoItem.appendChild(label);
+		todoItem.appendChild(content);
+		todoItem.appendChild(actions);
+
+		todoList.appendChild(todoItem);
+
+		if (todo.done) {
+			todoItem.classList.add('done');
+		}
+		
+		input.addEventListener('change', (e) => {
+			todo.done = e.target.checked;
+			localStorage.setItem('todos', JSON.stringify(todos));
+
+			if (todo.done) {
+				todoItem.classList.add('done');
+			} else {
+				todoItem.classList.remove('done');
+			}
+
+			DisplayTodos()
+
+		})
+
+		edit.addEventListener('click', (e) => {
+			const input = content.querySelector('input');
+			input.removeAttribute('readonly');
+			input.focus();
+			input.addEventListener('blur', (e) => {
+				input.setAttribute('readonly', true);
+				todo.content = e.target.value;
+				localStorage.setItem('todos', JSON.stringify(todos));
+				DisplayTodos()
+
+			})
+		})
+
+		deleteButton.addEventListener('click', (e) => {
+			todos = todos.filter(t => t != todo);
+			localStorage.setItem('todos', JSON.stringify(todos));
+			DisplayTodos()
+		})
+
+	})
 }
-// Обработчик события для добавления задачи
-addTaskInput.addEventListener("keypress", function (event) {
-  if (event.key === "Enter") {
-    addTask();
-  }
-});
