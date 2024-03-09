@@ -58,6 +58,11 @@ h4 {
 	margin-bottom: 0.5rem;
 }
 
+.app {
+  margin: auto;
+  width: 50%;
+}
+
 .greeting .title {
 	display: flex;
 }
